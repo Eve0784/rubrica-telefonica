@@ -15,12 +15,18 @@ function saveContact(event) {
         email: data.get('email'),
     };
 
-    createContact(newContact)
-    .then(createContact => {
-        console.log('Created contact:', createContact);
-        form.reset();
-        window.location.assign('../');
-    })
+    createContact(newContact).then(created => {
+    let contacts = JSON.parse(localStorage.getItem('contacts')) || [];
+    contacts.push(created);
+    localStorage.setItem('contacts', JSON.stringify(contacts));
+});
+
+    // createContact(newContact)
+    // .then(createContact => {
+    //     console.log('Created contact:', createContact);
+    //     form.reset();
+    //     window.location.assign('../');
+    // })
 }
 
 document.getElementById('new-contact-form').addEventListener('submit', saveContact);

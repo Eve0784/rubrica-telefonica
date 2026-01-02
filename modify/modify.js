@@ -22,7 +22,6 @@ modifyForm.addEventListener('submit', (e) => {
     e.preventDefault();
 });
 
-// Cargar contacto
 getContactById(id).then(result => {
     contact = result;
     console.log('✅ uploading contatto:', contact);
@@ -42,7 +41,7 @@ getContactById(id).then(result => {
     window.location.assign('../index.html');
 });
 
-// Guardar cambios
+
 saveBtn.addEventListener('click', (e) => {
     e.preventDefault();
     
@@ -63,20 +62,30 @@ saveBtn.addEventListener('click', (e) => {
     console.log('aggiornando contatto ID:', contact.id);
     console.log('Nuovi dati:', updatedContact);
     
-    // Deshabilitar botón mientras se guarda
-    saveBtn.disabled = true;
-    saveBtn.textContent = 'Salvando...';
-    
-    updateContact(contact.id, updatedContact)
-        .then(result => {
-            console.log('✅ Contatto aggiornato:', result);
-            window.location.assign('../detail/detail.html?contactId=' + contact.id);
-        })
-        .catch(error => {
-            console.error('❌ Error:', error);
-            alert('Errore durante l\'aggiornamento del contatto');
-            // Rehabilitar botón si hay error
-            saveBtn.disabled = false;
-            saveBtn.textContent = 'Salva Modifiche';
-        });
+saveBtn.disabled = true;
+saveBtn.textContent = 'Salvando...';
+
+updateContact(contact.id, updatedContact)
+    .then(updated => {
+        console.log('✅ Contatto aggiornato:', updated);
+
+        let contacts = JSON.parse(localStorage.getItem('contacts'));
+
+        if (contacts) {
+            const index = contacts.findIndex(c => c.id === contact.id);
+            if (index !== -1) {
+                contacts[index] = updated;
+                localStorage.setItem('contacts', JSON.stringify(contacts));
+            }
+        }
+
+        window.location.assign('../detail/detail.html?contactId=' + contact.id);
+    })
+    .catch(error => {
+        console.error('❌ Error:', error);
+        alert('Errore durante l\'aggiornamento del contatto');
+        saveBtn.disabled = false;
+        saveBtn.textContent = 'Salva Modifiche';
+    });
+
 });

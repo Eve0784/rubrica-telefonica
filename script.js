@@ -4,7 +4,7 @@ let contacts = [];
 let filteredContacts = [];
 let contactIconSVG = '';
 
-
+// Cargar el SVG una sola vez
 fetch('./assets/contact-icon.svg')
     .then(res => res.text())
     .then(svg => {
@@ -13,21 +13,42 @@ fetch('./assets/contact-icon.svg')
     })
     .catch(err => console.error('Errore al caricare SVG:', err));
 
+// Inicializar la app
 function init() {
     const contactsList = document.getElementById('contacts-list');
     contactsList.innerHTML = '<p>Caricando contatti...</p>';
 
-    getContacts().then(result => {
-        contacts = result;
+    // Intentar leer del cache
+    const cached = localStorage.getItem('contacts');
+    if (cached) {
+        contacts = JSON.parse(cached);
         filteredContacts = [...contacts];
         displayContacts(filteredContacts);
-    });
+        return; // Fin inmediato
+    }
+
+    // Si no hay cache, llamar a la API
+    getContacts()
+        .then(result => {
+            contacts = result;
+            filteredContacts = [...contacts];
+
+            // Guardar en cache
+            localStorage.setItem('contacts', JSON.stringify(contacts));
+
+            displayContacts(filteredContacts);
+        })
+        .catch(err => {
+            contactsList.innerHTML = '<p>Error al cargar contactos</p>';
+            console.error(err);
+        });
 }
 
+// Mostrar los contactos
 function displayContacts(contactsToDisplay) {
     const contactsList = document.getElementById('contacts-list');
     contactsList.innerHTML = '';
-    
+
     if (contactsToDisplay.length === 0) {
         contactsList.innerHTML = '<p class="no-results">Nessun contatto trovato</p>';
         return;
@@ -58,7 +79,7 @@ function displayContacts(contactsToDisplay) {
     }
 }
 
-
+// Filtrar contactos
 function filterContacts(searchTerm) {
     const term = searchTerm.toLowerCase().trim();
     
@@ -74,6 +95,7 @@ function filterContacts(searchTerm) {
     displayContacts(filteredContacts);
 }
 
+// Ordenar contactos por nombre
 function compareNames(a, b) {
     return a.name.localeCompare(b.name);
 }
@@ -83,6 +105,7 @@ function orderByTitle() {
     displayContacts(filteredContacts);
 }
 
+// Event listeners
 const orderByNameBtn = document.getElementById('name-order');
 orderByNameBtn.addEventListener('click', orderByTitle);
 
