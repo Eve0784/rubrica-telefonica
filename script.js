@@ -35,7 +35,7 @@ function displayContacts(contactsToDisplay) {
         
         const detailLink = document.createElement('a');
         detailLink.classList.add('action');
-        detailLink.appendChild(document.createTextNode('🡒'));
+        detailLink.appendChild(document.createTextNode('🡆'));
         detailLink.href = './detail/detail.html?contactId=' + contact.id;
         actionsDiv.appendChild(detailLink);
         
