@@ -11,11 +11,11 @@ fetch('./assets/contact-icon.svg')
         contactIconSVG = svg;
         init();
     })
-    .catch(err => console.error('Error cargando SVG:', err));
+    .catch(err => console.error('Errore al caricare SVG:', err));
 
 function init() {
     const contactsList = document.getElementById('contacts-list');
-    contactsList.innerHTML = '<p>Cargando contactos...</p>';
+    contactsList.innerHTML = '<p>Caricando contatti...</p>';
 
     getContacts().then(result => {
         contacts = result;
