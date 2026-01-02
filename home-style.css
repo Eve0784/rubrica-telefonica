@@ -1,0 +1,56 @@
+@import url('./shared/shared.css');
+
+header {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.contacts-book {
+    margin-top: 20px;
+    width: 100px;
+    height: 100px;
+    filter: drop-shadow(2px 2px 2px rgba(0,0,0,0.4));
+}
+.new-contact-icon svg{
+    width: 10px;
+    height: 10px;
+    fill: white;
+}
+
+.contact-icon svg { 
+    width: 20px; 
+    height: 20px; 
+    fill: #0d033e; 
+    filter: drop-shadow(2px 2px 2px rgba(0,0,0,0.4)); 
+}
+
+.actions-div {
+    margin-left: auto;
+}
+
+.search-container {
+    padding: 0px;
+    margin: 0px;
+}
+
+.search-bar {
+    width: 100%;
+    padding: 12px 20px;
+    font-size: 16px;
+    border: 2px solid #ddd;
+    border-radius: 50px;
+    outline: none;
+    transition: border-color 0.3s;
+    box-sizing: border-box;
+}
+
+.search-bar:focus {
+    border-color: #4CAF50;
+}
+
+.no-results {
+    text-align: center;
+    padding: 40px;
+    color: #666;
+    font-size: 18px;
+}

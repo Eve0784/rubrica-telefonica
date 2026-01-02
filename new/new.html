@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuovo Contatto</title>
+    <link rel="stylesheet" href="./new.css">
+</head>
+
+<body>
+    <div class="page">
+        <div>
+            <header>
+                <div class="arrow-div"><a class="action" href="../">🢀</a></div>
+                <h1 class="title">Nuovo Contatto</h1>
+            </header>
+            <main>
+                <div class="form-container">
+                    <form id="new-contact-form">
+                        <div>
+                            <label for="name-input">Nome:</label>
+                            <input type="text" id="name-input" name="name"/>
+                        </div>
+                        <div>
+                            <label for="surname-input">Cognome:</label>
+                            <input type="text" id="surname-input" name="surname"/>
+                        </div>
+                        <div>
+                            <label for="phone-input">Telefono:</label>
+                            <input type="tel" id="phone-input" name="phonenumber"/>
+                        </div>
+                        <div>
+                            <label for="email-input">Email:</label>
+                            <input type="email" id="email-input" name="email"/>
+                        </div>
+                        <div>
+                            <button id="save-btn" type="submit" class="buttons">Salva Contatto</button>
+                        </div>
+                    </form>
+                </div>
+            </main>
+</body>
+<script type="module" src="./new.js"></script>
+
+</html>
