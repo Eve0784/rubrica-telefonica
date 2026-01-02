@@ -53,23 +53,17 @@ body {
     background-color: #f9f9f98f;
 }
 .action {
-    background-color: rgb(37, 33, 79);
-    border-radius: 5px;
     font-size: x-large;
     min-width: 30px;
     min-height: 30px;
     text-decoration: none;
-    color: white;
     line-height: 30px;
     text-align: center;
     display: inline-block;
-    box-shadow: 1px 1px 2px rgb(29, 32, 34);
 }
 
 .action:hover {
     transform: scale(1.5);
-    background-color: white;
-    color: rgb(10, 4, 29);
 }
 
 .buttons-container {
